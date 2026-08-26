@@ -8,452 +8,12 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<style>
-:root{
-  --black:#000000;
-  --cream:#FFFEF7;
-  --white:#FFFFFF;
-  --muted:#737373;
-  --magenta:#8A0467;   /* Drük accent */
-  --pink:#FFACEA;      /* Drük pastel */
-
-  --font-display:'Bebas Neue', sans-serif;
-  --font-sans:'Inter', sans-serif;
-  --font-body:'Plus Jakarta Sans', sans-serif;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{background:var(--black);color:var(--cream);font-family:var(--font-body);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:clip}
-img{display:block;max-width:100%}
-
-.label{font-family:var(--font-sans);font-weight:500;font-size:.7rem;letter-spacing:.4em;text-transform:uppercase}
-
-/* ---------------- NAV ---------------- */
-nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;
-    padding:1.7rem clamp(1.3rem,5vw,3.4rem);transition:color .6s ease}
-nav .brand{font-family:var(--font-sans);font-weight:600;font-size:.95rem;letter-spacing:.34em;text-transform:uppercase;color:var(--ctrl,#fff);transition:color .6s ease}
-nav .meta{font-size:.68rem;letter-spacing:.32em;text-transform:uppercase;color:var(--ctrl,#fff);opacity:.75;transition:color .6s ease}
-@media(max-width:600px){nav .meta{display:none}}
-
-/* ---------------- HERO CAROUSEL ---------------- */
-.hero{position:relative;min-height:100vh;overflow:hidden;background:var(--black)}
-.slides{position:absolute;inset:0}
-.slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity 1.1s ease;
-  display:flex;padding:clamp(2rem,6vw,4rem)}
-.slide.is-active{opacity:1;visibility:visible;z-index:1}
-
-/* --- slide 1: photo, content bottom-left --- */
-.slide--photo{align-items:flex-end}
-.hero-bg{position:absolute;inset:0;z-index:0;
-  background:url('assets/hero-interior.jpeg') 39% 44%/cover no-repeat;
-  filter:grayscale(1) contrast(1.06) brightness(.62);}
-.hero-color{position:absolute;inset:0;z-index:1;
-  background:url('assets/hero-interior.jpeg') 39% 44%/cover no-repeat;
-  filter:brightness(.78) contrast(1.1) saturate(1.35);
-  -webkit-mask-image:radial-gradient(19% 38% at 39% 44%, #000 44%, rgba(0,0,0,0) 84%);
-          mask-image:radial-gradient(19% 38% at 39% 44%, #000 44%, rgba(0,0,0,0) 84%);}
-.slide--photo::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
-  background:linear-gradient(180deg,rgba(0,0,0,.35) 0%,rgba(0,0,0,.15) 45%,rgba(0,0,0,.82) 100%);}
-.side-label{position:absolute;right:clamp(1rem,4vw,2.6rem);top:50%;z-index:3;
-  transform:translateY(-50%) rotate(90deg);transform-origin:right center;
-  color:var(--pink);font-size:.66rem;letter-spacing:.5em;text-transform:uppercase;font-weight:500;opacity:.9}
-@media(max-width:700px){.side-label{display:none}}
-.hero-inner{position:relative;z-index:3;width:100%;max-width:1400px;margin:0 auto}
-.hero-inner .eyebrow{color:var(--pink);margin-top:1.6rem;display:inline-block}
-.hero-inner h1{font-family:var(--font-display);font-weight:400;color:var(--cream);
-  font-size:clamp(3.4rem,12vw,11rem);line-height:.86;letter-spacing:.02em;text-transform:uppercase}
-.hero-inner .tag{display:flex;align-items:center;gap:1.2rem;margin-top:1.6rem;flex-wrap:wrap}
-.hero-inner .tag p{font-family:var(--font-sans);font-weight:400;font-size:clamp(.78rem,1.5vw,1rem);
-  letter-spacing:.28em;text-transform:uppercase;color:var(--cream)}
-.hero-inner .tag p b{color:var(--cream);font-weight:600}
-.scroll{position:absolute;bottom:1.5rem;right:clamp(1.3rem,5vw,3.4rem);z-index:3;
-  font-size:.6rem;letter-spacing:.34em;text-transform:uppercase;color:var(--cream);opacity:.6;
-  display:flex;align-items:center;gap:.7rem}
-
-/* --- slide 2 & 3: typographic brand slides --- */
-.slide--dark{background:var(--black);color:var(--cream);align-items:center;justify-content:center;text-align:center}
-.slide--ink{background:var(--black);color:var(--cream);align-items:center;justify-content:center;text-align:center}
-/* video background (slide 2) */
-.slide-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
-/* clip stays clear, only a whisper of darkening */
-.video-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
-  background:linear-gradient(180deg, rgba(0,0,0,.06) 0%, rgba(0,0,0,.05) 55%, rgba(0,0,0,.2) 100%);}
-/* slide-2 text: centered horizontally, anchored toward the bottom */
-.slide--video{align-items:flex-end}
-.slide--video .slide-inner{max-width:720px;text-shadow:0 1px 20px rgba(0,0,0,.55);margin-bottom:clamp(.5rem,2.5vh,2rem)}
-.slide--video .eyebrow{font-size:.6rem;letter-spacing:.44em;opacity:.75;margin-bottom:1.1rem}
-.slide--video h2{font-size:clamp(1.5rem,4.2vw,3rem);letter-spacing:.08em;opacity:.9;
-  min-height:1.1em;transform:none!important}
-.slide--video .sub{font-size:clamp(.68rem,1.1vw,.82rem);letter-spacing:.22em;opacity:.62;margin-top:1rem}
-/* typewriter caret */
-.typewriter .caret{display:inline-block;width:.05em;height:.9em;background:currentColor;
-  margin-left:.1em;vertical-align:-0.05em;animation:blink 1.05s steps(1,end) infinite}
-.typewriter.done .caret{animation:none;opacity:0;transition:opacity .6s ease .2s}
-@keyframes blink{50%{opacity:0}}
-.slide-inner{position:relative;z-index:3;max-width:1100px}
-.slide-inner .eyebrow{display:inline-block;margin-bottom:1.6rem}
-.slide--dark .eyebrow{color:var(--pink)}
-.slide--ink .eyebrow{color:var(--cream);opacity:.6}
-.slide-inner h2{font-family:var(--font-display);font-weight:400;line-height:.9;
-  letter-spacing:.02em;text-transform:uppercase;font-size:clamp(3rem,11vw,10rem)}
-.slide--dark h2 .accent{color:var(--pink)}
-.slide--video h2 .accent{color:var(--cream)}
-.slide--ink h2 .accent{color:var(--cream)}
-.slide-inner .sub{margin-top:1.8rem;font-family:var(--font-sans);font-weight:400;
-  font-size:clamp(.82rem,1.5vw,1.05rem);letter-spacing:.2em;text-transform:uppercase}
-.slide--dark .sub{color:var(--cream);opacity:.78}
-.slide--ink .sub{color:var(--cream);opacity:.72}
-
-/* --- entrance animation for slide content --- */
-.slide-inner>*,.hero-inner>*{opacity:0;transform:translateY(30px);
-  transition:opacity .95s ease,transform 1.05s cubic-bezier(.16,.8,.24,1)}
-.slide.is-active .slide-inner>*,.slide.is-active .hero-inner>*{opacity:1;transform:none}
-.slide-inner>*:nth-child(1),.hero-inner>*:nth-child(1){transition-delay:.18s}
-.slide-inner>*:nth-child(2),.hero-inner>*:nth-child(2){transition-delay:.34s}
-.slide-inner>*:nth-child(3),.hero-inner>*:nth-child(3){transition-delay:.5s}
-@media(prefers-reduced-motion:reduce){
-  .slide-inner>*,.hero-inner>*{opacity:1;transform:none;transition:none}}
-
-/* --- carousel controls --- */
-.car-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:6;
-  width:46px;height:46px;display:flex;align-items:center;justify-content:center;
-  background:none;border:none;cursor:pointer;color:var(--ctrl,#fff);opacity:.5;transition:opacity .3s}
-.car-arrow:hover{opacity:1}
-.car-arrow svg{width:26px;height:26px}
-.car-arrow.prev{left:clamp(.3rem,1.6vw,1.2rem)}
-.car-arrow.next{right:clamp(.3rem,1.6vw,1.2rem)}
-.dots{position:absolute;bottom:1.9rem;left:50%;transform:translateX(-50%);z-index:6;display:flex;align-items:center;gap:.7rem}
-.dot{width:7px;height:7px;border:0;border-radius:50%;background:var(--ctrl,#fff);
-  cursor:pointer;padding:0;opacity:.35;transition:opacity .35s ease,transform .35s ease}
-.dot:hover{opacity:.7}
-.dot.is-active{opacity:1;transform:scale(1.25)}
-body[data-theme="dark"]{--ctrl:var(--cream)}
-body[data-theme="light"]{--ctrl:#141414}
-body[data-theme="magenta"]{--ctrl:var(--cream)}
-@media(max-width:600px){.car-arrow{display:none}}
-
-/* ---------------- ABOUT (Über uns) ---------------- */
-.about{background:var(--cream);color:var(--black);
-  padding:clamp(5rem,12vw,10rem) clamp(1.3rem,5vw,3.4rem)}
-.about-inner{max-width:1200px;margin:0 auto}
-.about .eyebrow{color:var(--black);margin-bottom:1.8rem;display:inline-block}
-.about h2{font-family:var(--font-display);font-weight:400;line-height:.92;letter-spacing:.01em;
-  font-size:clamp(2.6rem,8vw,6.8rem);text-transform:uppercase;color:var(--black);max-width:16ch}
-.about h2 .mag{color:var(--black)}
-.about-lead{margin-top:2rem;max-width:60ch;font-size:clamp(1rem,1.7vw,1.25rem);
-  line-height:1.65;color:#2c2c2c}
-
-/* scroll-driven timeline: 2015 → 4 → 10 at the same spot */
-.timeline{position:relative;margin:clamp(2rem,5vw,3.5rem) 0}
-.tl-stage{display:grid;width:100%}
-.tl-step{grid-area:1/1;display:flex;align-items:center;gap:clamp(1.2rem,4vw,3.2rem);
-  flex-wrap:wrap;opacity:0;transform:translateY(40px) scale(.965);
-  transition:opacity .8s ease,transform .95s cubic-bezier(.16,.8,.24,1);pointer-events:none}
-.tl-step.active{opacity:1;transform:none}
-.tl-num{font-family:var(--font-display);font-weight:400;line-height:.78;
-  font-size:clamp(5rem,18vw,16rem);color:var(--black);letter-spacing:.005em}
-.tl-cap{max-width:32ch}
-.tl-cap b{display:block;font-family:var(--font-sans);font-weight:600;
-  font-size:clamp(1.1rem,2.2vw,1.7rem);letter-spacing:.02em;text-transform:uppercase;color:var(--black)}
-.tl-cap span{display:block;margin-top:.7rem;color:#3a3a3a;font-size:1.02rem;line-height:1.6}
-.tl-ticks{margin-top:clamp(1.4rem,3vh,2.2rem);display:flex;gap:.55rem}
-.tl-tick{width:26px;height:3px;background:rgba(0,0,0,.16);transition:background .45s ease}
-.tl-tick.active{background:var(--magenta)}
-@media(prefers-reduced-motion:reduce){.tl-step{transition:opacity .3s}}
-
-/* address / opening hours */
-.about-info{display:grid;grid-template-columns:1fr 1fr;gap:clamp(2rem,6vw,5rem)}
-@media(max-width:720px){.about-info{grid-template-columns:1fr;gap:2.8rem}}
-.info-block .label{color:var(--black);display:block;margin-bottom:1.3rem}
-.info-block .address{font-family:var(--font-sans);font-weight:300;
-  font-size:clamp(1.2rem,2.3vw,1.65rem);line-height:1.5;color:var(--black)}
-.hours{list-style:none;max-width:400px}
-.hours li{display:flex;justify-content:space-between;gap:1.5rem;
-  padding:.85rem 0;border-bottom:1px solid rgba(0,0,0,.12)}
-.hours li:first-child{border-top:1px solid rgba(0,0,0,.12)}
-.hours li .day{font-family:var(--font-sans);font-weight:500;font-size:.82rem;
-  letter-spacing:.14em;text-transform:uppercase;color:var(--black)}
-.hours li .time{font-family:var(--font-sans);font-weight:400;font-size:.95rem;color:#2c2c2c;
-  font-variant-numeric:tabular-nums}
-.hours li .time.closed{color:var(--muted);letter-spacing:.04em}
-.about-note{margin-top:1rem;font-size:.72rem;letter-spacing:.04em;color:var(--muted)}
-
-/* ---------------- LEISTUNGEN (Die Kollektion) ---------------- */
-.services{background:var(--black);color:var(--cream);padding:clamp(5rem,12vw,9rem) clamp(1.3rem,5vw,3.4rem)}
-.services-inner{max-width:1200px;margin:0 auto}
-.services .eyebrow{color:var(--pink);display:inline-block;margin-bottom:1.6rem}
-.services h2{font-family:var(--font-display);font-weight:400;line-height:.95;letter-spacing:.01em;
-  text-transform:uppercase;font-size:clamp(2.4rem,7vw,5.5rem);color:var(--cream);max-width:15ch;
-  margin-bottom:clamp(2.6rem,6vw,4.2rem)}
-.menu{columns:2;column-gap:clamp(2.5rem,6vw,5.5rem)}
-@media(max-width:720px){.menu{columns:1}}
-.menu-cat{break-inside:avoid;-webkit-column-break-inside:avoid;margin:0 0 clamp(2.4rem,4.5vw,3.4rem)}
-.menu-cat>h3{font-family:var(--font-display);font-weight:400;font-size:clamp(1.7rem,3.4vw,2.6rem);
-  letter-spacing:.03em;text-transform:uppercase;color:var(--cream);
-  padding-bottom:.7rem;margin-bottom:.8rem;border-bottom:1px solid rgba(255,255,255,.22)}
-.menu-sub{margin:1.15rem 0 .2rem}
-.menu-sub .slabel{display:block;font-family:var(--font-sans);font-weight:600;font-size:.66rem;
-  letter-spacing:.24em;text-transform:uppercase;color:var(--pink);margin-bottom:.45rem}
-.menu-row{display:flex;align-items:baseline;justify-content:space-between;gap:1.2rem;
-  padding:.55rem 0;border-bottom:1px solid rgba(255,255,255,.09)}
-.menu-row .n{font-family:var(--font-body);font-weight:300;font-size:.98rem;color:rgba(255,254,247,.82)}
-.menu-row .n em{font-style:normal;color:rgba(255,254,247,.5);font-size:.85em}
-.menu-row .p{font-family:var(--font-sans);font-weight:600;font-size:.98rem;color:var(--cream);
-  white-space:nowrap;font-variant-numeric:tabular-nums}
-.services-note{margin-top:clamp(2.5rem,5vw,3.5rem);font-size:.9rem;line-height:1.6;color:rgba(255,254,247,.6);max-width:62ch}
-.menu-body{max-height:none}
-/* mobile: categories collapse into space-saving accordion */
-@media(max-width:720px){
-  .menu-cat{margin-bottom:0;border-bottom:1px solid rgba(255,255,255,.15)}
-  .menu-cat>h3{cursor:pointer;position:relative;margin-bottom:0;border-bottom:0;padding:1.15rem 2.4rem 1.15rem 0}
-  .menu-cat>h3::after{content:'+';position:absolute;right:.15rem;top:50%;transform:translateY(-50%);
-    font-family:var(--font-sans);font-weight:300;font-size:1.5rem;line-height:1;color:var(--pink);transition:color .3s}
-  .menu-cat.open>h3::after{content:'\2013'}
-  .menu-body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.16,.8,.24,1),opacity .45s ease}
-  .menu-cat:not(.open)>.menu-body{opacity:.35}
-  .menu-cat.open>.menu-body{opacity:1}
-}
-
-/* ---------------- PHILOSOPHIE (Galerie-Szene) ---------------- */
-.philo{display:grid;grid-template-columns:1fr 1.15fr;background:var(--cream);color:var(--black)}
-@media(max-width:840px){.philo{grid-template-columns:1fr}}
-.philo-text{display:flex;flex-direction:column;justify-content:center;
-  padding:clamp(3.5rem,7vw,7rem) clamp(1.4rem,5vw,5rem)}
-.philo-text .eyebrow{color:var(--black);margin-bottom:1.5rem;display:inline-block}
-.philo-text h2{font-family:var(--font-display);font-weight:400;line-height:.94;letter-spacing:.01em;
-  text-transform:uppercase;font-size:clamp(2.4rem,6vw,5rem);color:var(--black);margin-bottom:1.9rem}
-.philo-text p{max-width:46ch;color:#333;font-size:1.02rem;line-height:1.75;margin-bottom:1.15rem}
-.philo-link{margin-top:1.6rem;display:inline-flex;align-items:center;gap:.9rem;text-decoration:none;
-  font-family:var(--font-sans);font-weight:500;font-size:.75rem;letter-spacing:.24em;text-transform:uppercase;
-  color:var(--black);padding-bottom:.5rem;border-bottom:1px solid var(--black);width:fit-content;
-  transition:gap .35s ease,color .35s ease,border-color .35s ease}
-.philo-link:hover{gap:1.6rem;color:var(--magenta);border-color:var(--magenta)}
-.philo-media{position:relative;align-self:center;aspect-ratio:880/1024;background:#161616;overflow:hidden}
-.philo-scene{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  filter:grayscale(1) contrast(1.06) brightness(.97)}
-/* the framed artwork = colour carousel inside the grayscale gallery */
-.philo-frame{position:absolute;left:36.59%;top:13.96%;width:49.2%;height:56.2%;overflow:hidden;background:#cfc7ba}
-.philo-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-  opacity:0;transition:opacity 1.1s ease;filter:grayscale(1) contrast(1.04) brightness(.96)}
-.philo-frame img.on{opacity:1}
-/* carousel arrows, grouped on one side */
-.philo-nav{position:absolute;right:6%;bottom:6.5%;z-index:3;display:flex;gap:.55rem}
-.philo-nav button{width:38px;height:38px;border-radius:50%;cursor:pointer;padding:0;
-  display:flex;align-items:center;justify-content:center;color:#f5f0e8;
-  background:rgba(18,18,18,.4);border:1px solid rgba(245,240,232,.55);
-  -webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px);transition:background .3s,border-color .3s}
-.philo-nav button:hover{background:rgba(18,18,18,.7);border-color:#f5f0e8}
-.philo-nav svg{width:17px;height:17px}
-
-/* ---------------- EVENTS (Karten-Karussell) ---------------- */
-.events{background:var(--cream);color:var(--black);padding:clamp(4rem,9vw,7rem) 0;overflow:hidden}
-.events-head{max-width:1240px;margin:0 auto clamp(2rem,4vw,3rem);padding:0 clamp(1.3rem,5vw,3.4rem);
-  display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem}
-.events-head .eyebrow{color:var(--black);margin-bottom:1rem;display:inline-block}
-.events-head h2{font-family:var(--font-display);font-weight:400;text-transform:uppercase;letter-spacing:.01em;
-  font-size:clamp(2rem,5vw,3.6rem);line-height:.95;color:var(--black)}
-.ev-arrows{display:flex;gap:.6rem;flex-shrink:0}
-.ev-arrows button{width:52px;height:52px;border-radius:50%;border:0;cursor:pointer;color:var(--cream);
-  background:var(--black);display:flex;align-items:center;justify-content:center;transition:transform .3s}
-.ev-arrows button:hover{transform:scale(1.07)}
-.ev-arrows svg{width:20px;height:20px}
-.events-track{display:flex;gap:clamp(1rem,2vw,1.6rem);overflow-x:auto;scroll-snap-type:x mandatory;
-  padding:0 clamp(1.3rem,5vw,3.4rem);scrollbar-width:none;-webkit-overflow-scrolling:touch}
-.events-track::-webkit-scrollbar{display:none}
-.event-card{scroll-snap-align:start;flex:0 0 min(86%,600px);min-height:clamp(23rem,42vw,32rem);
-  padding:clamp(1.7rem,3vw,2.8rem);display:flex;flex-direction:column;position:relative;overflow:hidden}
-@media(min-width:760px){.event-card{flex-basis:min(47%,600px)}}
-.ev-tag{font-family:var(--font-sans);font-weight:600;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;opacity:.75}
-.ev-mark{position:absolute;top:clamp(1.5rem,3vw,2.4rem);right:clamp(1.4rem,3vw,2.4rem);
-  font-family:var(--font-display);font-weight:400;font-size:clamp(1.5rem,2.7vw,2.1rem);
-  letter-spacing:.06em;line-height:1;color:currentColor;opacity:.9}
-.ev-text{font-family:var(--font-sans);font-weight:400;font-size:clamp(1.35rem,2.3vw,2rem);
-  line-height:1.2;margin-top:auto;max-width:24ch}
-.ev-meta{margin-top:clamp(1.5rem,3vw,2.4rem)}
-.ev-meta b{display:block;font-family:var(--font-sans);font-weight:600;font-size:1.05rem}
-.ev-meta span{display:block;font-size:.9rem;opacity:.72;margin-top:.25rem}
-.event-card:nth-child(2n+1){background:var(--magenta);color:var(--cream)}
-.event-card:nth-child(2n){background:#141414;color:var(--cream)}
-
-/* ---------------- GALERIE (Bento-Mosaik) ---------------- */
-.gallery{background:var(--black);color:var(--cream);padding:clamp(4rem,9vw,7rem) clamp(1.3rem,5vw,3.4rem)}
-.gallery-inner{max-width:1240px;margin:0 auto}
-.gallery-head{display:flex;align-items:flex-end;justify-content:space-between;gap:1.5rem;flex-wrap:wrap;
-  margin-bottom:clamp(1.8rem,4vw,3rem)}
-.gallery .eyebrow{color:var(--pink);margin-bottom:1rem;display:inline-block}
-.gallery-head h2{font-family:var(--font-display);font-weight:400;text-transform:uppercase;letter-spacing:.01em;
-  font-size:clamp(2rem,5vw,3.6rem);line-height:.95;color:var(--cream)}
-.gallery-head .g-handle{font-family:var(--font-sans);font-weight:500;font-size:.78rem;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--cream);opacity:.7;text-decoration:none;white-space:nowrap}
-.gallery-head .g-handle:hover{opacity:1;color:var(--pink)}
-/* ---- highlights carousel (scroll-snap, native swipe on mobile) ---- */
-.gal-arrows{display:flex;gap:.6rem;flex-shrink:0}
-.gal-arrows button{width:52px;height:52px;border-radius:50%;cursor:pointer;color:var(--cream);
-  background:transparent;border:1px solid rgba(255,254,247,.28);
-  display:flex;align-items:center;justify-content:center;transition:background .3s,transform .3s,border-color .3s}
-.gal-arrows button:hover{background:rgba(255,254,247,.1);border-color:rgba(255,254,247,.6);transform:scale(1.07)}
-.gal-arrows svg{width:20px;height:20px}
-@media(max-width:720px){.gal-arrows{display:none}}
-/* each slide = one service: a header + a 3–4 image grid */
-.gallery-track{display:flex;gap:clamp(1rem,3vw,2rem);overflow-x:auto;scroll-snap-type:x mandatory;
-  scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:.3rem}
-.gallery-track::-webkit-scrollbar{display:none}
-.highlight-slide{flex:0 0 100%;min-width:0;scroll-snap-align:start}
-.hl-head{display:flex;align-items:baseline;gap:clamp(.7rem,2vw,1.3rem);flex-wrap:wrap;
-  margin-bottom:clamp(1rem,2.2vw,1.6rem)}
-.hl-num{font-family:var(--font-sans);font-weight:600;font-size:.7rem;letter-spacing:.24em;color:var(--pink)}
-.hl-head h3{font-family:var(--font-display);font-weight:400;text-transform:uppercase;letter-spacing:.02em;
-  line-height:.9;font-size:clamp(1.9rem,4vw,3rem);color:var(--cream)}
-.hl-head p{flex:1 1 15rem;font-family:var(--font-body);font-weight:300;line-height:1.5;
-  font-size:clamp(.85rem,1vw,.98rem);color:rgba(255,254,247,.7);max-width:48ch}
-.hl-grid{display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:clamp(130px,30vw,210px);
-  gap:clamp(.5rem,1vw,.9rem)}
-.hl-grid a{position:relative;overflow:hidden;background:#161616;display:block;
-  box-shadow:0 0 0 1px rgba(255,254,247,.09)}
-.hl-grid a:last-child:nth-child(odd){grid-column:1 / -1}
-.hl-grid img{width:100%;height:100%;object-fit:cover;
-  transition:transform .8s cubic-bezier(.16,.8,.24,1)}
-.hl-grid a:hover img{transform:scale(1.05)}
-/* Nageldesign slide: portrait (model) as a tall tile + nail shots — stays vertical on mobile */
-.hl-grid--feature a:first-child{grid-column:1;grid-row:1 / span 2}
-.hl-grid--feature a:last-child:nth-child(odd){grid-column:auto}
-.hl-grid--feature a:nth-child(4){grid-column:1 / -1}
-/* Kräuter slide: a portrait + a landscape photo — stack on mobile, side by side on desktop */
-.hl-grid--duo{grid-template-columns:1fr;grid-auto-rows:auto}
-.hl-grid--duo a:nth-child(1){aspect-ratio:4/5}
-.hl-grid--duo a:nth-child(2){aspect-ratio:3/2}
-/* Unser Studio: a wide hero (story wall) on top + 3 interior shots below */
-.hl-grid--studio a:nth-child(1){grid-column:1 / -1;aspect-ratio:16/10}
-.hl-grid--studio a:nth-child(1) img{object-position:50% 30%}
-.hl-grid--studio a:nth-child(4){grid-column:1 / -1;aspect-ratio:16/10}
-/* Pediküre-Spa: a tall portrait + a 2x2 of spa shots (5 images) */
-.hl-grid--feat5 a:nth-child(1){grid-column:1;grid-row:1 / span 2}
-.hl-grid--feat5 a:last-child:nth-child(odd){grid-column:auto}
-@media(min-width:760px){
-  .hl-grid{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:1fr;
-    grid-auto-rows:clamp(240px,32vw,380px)}
-  .hl-grid a:last-child:nth-child(odd){grid-column:auto}
-  .hl-grid--feature{grid-auto-flow:row;grid-template-columns:.85fr 1fr 1fr;
-    grid-auto-rows:clamp(190px,25vw,300px)}
-  .hl-grid--feature a:first-child{grid-column:1;grid-row:1 / span 2}
-  .hl-grid--feature a:nth-child(2){grid-column:2;grid-row:1}
-  .hl-grid--feature a:nth-child(3){grid-column:3;grid-row:1}
-  .hl-grid--feature a:nth-child(4){grid-column:2 / span 2;grid-row:2}
-  .hl-grid--duo{grid-auto-flow:column;grid-template-columns:.8fr 1.25fr;
-    grid-auto-rows:clamp(320px,38vw,460px)}
-  .hl-grid--duo a:nth-child(1),.hl-grid--duo a:nth-child(2){aspect-ratio:auto}
-  .hl-grid--studio{grid-auto-flow:row;grid-template-columns:repeat(3,1fr);
-    grid-template-rows:clamp(300px,32vw,460px) clamp(150px,17vw,220px)}
-  .hl-grid--studio a:nth-child(1){grid-column:1 / -1;grid-row:1;aspect-ratio:auto}
-  .hl-grid--studio a:nth-child(2){grid-column:1;grid-row:2}
-  .hl-grid--studio a:nth-child(3){grid-column:2;grid-row:2}
-  .hl-grid--studio a:nth-child(4){grid-column:3;grid-row:2;aspect-ratio:auto}
-  .hl-grid--feat5{grid-auto-flow:row;grid-template-columns:.85fr 1fr 1fr;
-    grid-auto-rows:clamp(150px,19vw,230px)}
-  .hl-grid--feat5 a:nth-child(1){grid-column:1;grid-row:1 / span 2}
-  .hl-grid--feat5 a:nth-child(2){grid-column:2;grid-row:1}
-  .hl-grid--feat5 a:nth-child(3){grid-column:3;grid-row:1}
-  .hl-grid--feat5 a:nth-child(4){grid-column:2;grid-row:2}
-  .hl-grid--feat5 a:nth-child(5){grid-column:3;grid-row:2}
-}
-.gallery-dots{display:flex;justify-content:center;gap:.6rem;margin-top:clamp(1.4rem,3vw,2rem)}
-.gal-dot{width:7px;height:7px;border:0;border-radius:50%;padding:0;cursor:pointer;
-  background:var(--cream);opacity:.32;transition:opacity .35s ease,transform .35s ease}
-.gal-dot:hover{opacity:.6}
-.gal-dot.is-active{opacity:1;transform:scale(1.25)}
-
-/* ---------------- JOURNAL (Stay up to date) ---------------- */
-.journal{background:var(--cream);color:var(--black);padding:clamp(4rem,9vw,7rem) clamp(1.3rem,5vw,3.4rem)}
-.journal-inner{max-width:1100px;margin:0 auto}
-.journal-kicker{font-family:var(--font-sans);font-weight:500;font-size:.72rem;letter-spacing:.28em;
-  text-transform:uppercase;color:var(--black);opacity:.55}
-.journal-title{font-family:var(--font-sans);font-weight:400;letter-spacing:-.015em;line-height:1;
-  font-size:clamp(2.6rem,7vw,5rem);margin-top:1rem}
-.posts{margin-top:clamp(2.5rem,5vw,4rem);display:flex;flex-direction:column;gap:clamp(2.8rem,6vw,5rem)}
-.post-media{display:block;overflow:hidden;background:#e7e6de;aspect-ratio:16/9}
-.post-media img{width:100%;height:100%;object-fit:cover;transition:transform .8s cubic-bezier(.16,.8,.24,1)}
-.post:hover .post-media img{transform:scale(1.03)}
-.post h3{font-family:var(--font-sans);font-weight:400;font-size:clamp(1.4rem,2.6vw,2rem);
-  letter-spacing:-.01em;line-height:1.15;margin-top:1.4rem}
-.post h3 a{color:inherit;text-decoration:none;transition:color .3s}
-.post h3 a:hover{color:var(--magenta)}
-.post-date{font-family:var(--font-sans);font-weight:500;font-size:.72rem;letter-spacing:.2em;
-  text-transform:uppercase;color:var(--muted);margin-top:.7rem}
-
-/* ---------------- FAQ (accordion) ---------------- */
-.faq{position:relative;overflow:hidden;background:var(--black);color:var(--cream);
-  padding:clamp(4rem,9vw,7rem) clamp(1.3rem,5vw,3.4rem)}
-.faq-bg{position:absolute;inset:-40px;z-index:0;
-  background:url('assets/philo-art-2.jpg') center 30%/cover no-repeat;
-  filter:blur(9px) brightness(.9);opacity:.5;transform:scale(1.04)}
-.faq::after{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
-  background:linear-gradient(180deg, rgba(0,0,0,.3) 0%, rgba(0,0,0,.55) 45%, rgba(0,0,0,.8) 100%)}
-.faq-inner{position:relative;z-index:1;max-width:1240px;margin:0 auto;
-  display:grid;grid-template-columns:1fr;gap:clamp(1.6rem,4vw,3rem)}
-.faq-aside .eyebrow{color:var(--pink);display:inline-block;margin-bottom:1.1rem}
-.faq-big{font-family:var(--font-display);font-weight:400;line-height:.82;letter-spacing:.02em;
-  text-transform:uppercase;font-size:clamp(5rem,20vw,13rem)}
-.faq-sub{margin-top:1.2rem;font-family:var(--font-body);font-weight:300;line-height:1.65;
-  color:rgba(255,254,247,.68);max-width:26ch;font-size:clamp(.95rem,1.3vw,1.08rem)}
-@media(min-width:860px){
-  .faq-inner{grid-template-columns:.8fr 1.45fr;gap:clamp(2.5rem,5vw,5.5rem);align-items:start}
-  .faq-aside{position:sticky;top:clamp(2rem,10vh,7rem)}
-}
-.faq-item{border-top:1px solid rgba(255,255,255,.14)}
-.faq-item:last-child{border-bottom:1px solid rgba(255,255,255,.14)}
-.faq-q{width:100%;background:none;border:0;cursor:pointer;color:var(--cream);text-align:left;
-  display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
-  padding:clamp(1.2rem,2.4vw,1.7rem) 0;font-family:var(--font-sans);font-weight:400;
-  font-size:clamp(1rem,1.6vw,1.2rem);letter-spacing:.01em;transition:color .3s}
-.faq-q:hover{color:var(--pink)}
-.faq-icon{position:relative;flex-shrink:0;width:16px;height:16px}
-.faq-icon::before,.faq-icon::after{content:"";position:absolute;top:50%;left:0;width:16px;height:1.5px;
-  margin-top:-.75px;background:var(--pink);transition:transform .35s ease}
-.faq-icon::after{transform:rotate(90deg)}
-.faq-item.open .faq-icon::after{transform:rotate(0)}
-.faq-a{overflow:hidden;max-height:0;transition:max-height .4s ease}
-.faq-a p{padding:0 0 clamp(1.2rem,2.4vw,1.7rem);max-width:62ch;font-family:var(--font-body);
-  font-weight:300;line-height:1.7;color:rgba(255,254,247,.72);font-size:clamp(.92rem,1.2vw,1.02rem)}
-
-/* ---------------- FOOTER (4 columns) ---------------- */
-.footer{background:var(--black);color:var(--cream);border-top:1px solid rgba(255,255,255,.1);
-  padding:clamp(3rem,6vw,5rem) clamp(1.3rem,5vw,3.4rem) clamp(1.6rem,3vw,2.2rem)}
-.footer-inner{max-width:1240px;margin:0 auto}
-.footer-cols{display:grid;grid-template-columns:1.6fr 1fr 1.4fr 1fr;gap:clamp(1.8rem,4vw,3.5rem)}
-.footer-brand{font-family:var(--font-display);font-weight:400;font-size:clamp(1.7rem,2.6vw,2.2rem);
-  letter-spacing:.14em;text-transform:uppercase;color:var(--cream)}
-.footer-tagline{margin-top:1.2rem;font-size:.92rem;line-height:1.7;color:rgba(255,254,247,.6);max-width:34ch}
-.footer-col h4{font-family:var(--font-display);font-weight:400;font-size:clamp(1.3rem,1.8vw,1.55rem);
-  letter-spacing:.05em;color:var(--cream);margin-bottom:1.4rem}
-.footer-col ul{list-style:none}
-.footer-col li{margin-bottom:.8rem}
-.footer-col a{color:rgba(255,254,247,.6);text-decoration:none;transition:color .3s}
-.footer-col a:hover{color:var(--pink)}
-.footer-contact p{margin-bottom:1rem;font-size:.92rem;line-height:1.6;color:rgba(255,254,247,.6)}
-.footer-contact a{color:rgba(255,254,247,.6);text-decoration:none;transition:color .3s}
-.footer-contact a:hover{color:var(--pink)}
-.footer-bottom{display:flex;align-items:center;justify-content:space-between;gap:.6rem 1.4rem;flex-wrap:wrap;
-  margin-top:clamp(2.4rem,5vw,3.6rem);padding-top:clamp(1.3rem,2.5vw,1.8rem);
-  border-top:1px solid rgba(255,255,255,.12);
-  font-size:.75rem;letter-spacing:.05em;color:rgba(255,254,247,.45)}
-.footer-made{color:inherit;text-decoration:none;transition:opacity .3s}
-.footer-made:hover{opacity:.8}
-.footer-made b{font-weight:700;color:var(--cream)}
-.footer-made .lab{color:var(--pink)}
-@media(max-width:860px){.footer-cols{grid-template-columns:1fr 1fr}}
-@media(max-width:520px){.footer-cols{grid-template-columns:1fr;gap:2.2rem}.footer-bottom{justify-content:flex-start}}
-
-/* reveal */
-.reveal{opacity:0;transform:translateY(26px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
-.reveal.in{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
-</style>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body data-theme="dark">
 
 <nav>
   <div class="brand">Nail&nbsp;Gallery</div>
-  <div class="meta">Bald in Frankfurt</div>
 </nav>
 
 <!-- ============ HERO CAROUSEL ============ -->
@@ -470,6 +30,10 @@ body[data-theme="magenta"]{--ctrl:var(--cream)}
         <span class="label eyebrow">Vilbeler Str. 27 · 60311 Frankfurt am Main</span>
         <div class="tag">
           <p>Every nail is a <b>masterpiece</b></p>
+        </div>
+        <div class="cta-row">
+          <a class="btn btn--primary" href="#ueber-uns">Termin buchen</a>
+          <a class="btn btn--ghost" href="https://www.instagram.com/nailgallery.ffm/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>Instagram</a>
         </div>
       </div>
       <div class="scroll">Scroll</div>
@@ -514,6 +78,11 @@ body[data-theme="magenta"]{--ctrl:var(--cream)}
     <span class="label eyebrow reveal">Über uns</span>
     <h2 class="reveal">Nimm dir <span class="mag">Zeit</span> für deine Nägel.</h2>
     <p class="about-lead reveal">Unser Handwerk hat vietnamesische Wurzeln, über Jahre weitergegeben und geübt. 2015 haben wir unser erstes Studio eröffnet, heute bringen wir diese Erfahrung nach Frankfurt. Wir nehmen uns Zeit, beraten dich ehrlich und arbeiten so sorgfältig, als wären es unsere eigenen Nägel. Sag uns, was dir gefällt, den Rest bekommen wir gemeinsam hin.</p>
+
+    <div class="cta-row reveal">
+      <a class="btn btn--primary" href="#ueber-uns">Termin buchen</a>
+      <a class="btn btn--ghost" href="https://www.instagram.com/nailgallery.ffm/" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>Instagram</a>
+    </div>
 
     <div class="timeline" id="timeline">
       <div class="tl-stage">
@@ -590,12 +159,11 @@ body[data-theme="magenta"]{--ctrl:var(--cream)}
           <h3>Pediküre-Spa</h3>
           <p>Ein gehobenes Fuß-Ritual zum Abschalten und Auftanken.</p>
         </div>
-        <div class="hl-grid hl-grid--feat5">
-          <a href="#"><img src="assets/pedispa-aesop.jpg" alt="Botanische Pflegeprodukte im Spa-Bereich"></a>
-          <a href="#"><img src="assets/pedispa-bath.jpg" alt="Entspannendes Fußbad mit Blüten"></a>
-          <a href="#"><img src="assets/pedispa-feet.jpg" alt="Gepflegte Füße im Pediküre-Spa"></a>
-          <a href="#"><img src="assets/pedispa-toes.jpg" alt="Pediküre in kräftigem Rot"></a>
-          <a href="#"><img src="assets/pedispa-salts.jpg" alt="Beruhigende Bath Salts und Kräuter"></a>
+        <div class="hl-grid hl-grid--pedi">
+          <a href="#"><img src="assets/pedispa-footbath.jpg" alt="Entspannendes Fußbad im Pediküre-Spa"></a>
+          <a href="#"><img src="assets/pedispa-wine.jpg" alt="Ein Glas Wein zum Pediküre-Ritual"></a>
+          <a href="#"><img src="assets/pedispa-gns.jpg" alt="G.N.S Gel, Base Coat und Glitter — German Nail Supplies"></a>
+          <a href="#"><img src="assets/pedispa-lotion.jpg" alt="Hand &amp; Body Lotion Pflegeprodukte"></a>
         </div>
       </section>
 
@@ -617,6 +185,9 @@ body[data-theme="magenta"]{--ctrl:var(--cream)}
 
     </div>
     <div class="gallery-dots reveal" id="galleryDots"></div>
+    <div class="cta-row reveal" style="justify-content:center;margin-top:clamp(2rem,4vw,3rem)">
+      <a class="btn btn--primary" href="galerie.html">Zur Ausstellung <span aria-hidden="true">&nbsp;&rarr;</span></a>
+    </div>
   </div>
 </section>
 
@@ -625,68 +196,86 @@ body[data-theme="magenta"]{--ctrl:var(--cream)}
   <div class="services-inner">
     <span class="label eyebrow reveal">Leistungen &amp; Preise</span>
     <h2 class="reveal">Such dir dein Meisterwerk aus.</h2>
+    <div class="cta-row reveal">
+      <a class="btn btn--primary" href="leistungen.html">Komplette Preisliste ansehen <span aria-hidden="true">&nbsp;&rarr;</span></a>
+    </div>
 
     <div class="menu">
       <div class="menu-cat reveal">
-        <h3>Gel / Pulver</h3>
+        <h3>Neumodellage mit Gel</h3>
         <div class="menu-body">
-          <div class="menu-sub">
-            <span class="slabel">Neumodellage</span>
-            <div class="menu-row"><span class="n">mit French / Farbe</span><span class="p">42 €</span></div>
-            <div class="menu-row"><span class="n">Natur</span><span class="p">37 €</span></div>
-            <div class="menu-row"><span class="n">mit Glitzer French / Verlauf</span><span class="p">47 €</span></div>
-          </div>
-          <div class="menu-sub">
-            <span class="slabel">Auffüllung</span>
-            <div class="menu-row"><span class="n">mit French / Farbe</span><span class="p">35 €</span></div>
-            <div class="menu-row"><span class="n">mit Glitzer French / Verlauf</span><span class="p">40 €</span></div>
-            <div class="menu-row"><span class="n">Natur</span><span class="p">30 €</span></div>
-          </div>
-          <div class="menu-sub">
-            <span class="slabel">Zehen</span>
-            <div class="menu-row"><span class="n">Neumodellage mit French / Farbe</span><span class="p">50 €</span></div>
-            <div class="menu-row"><span class="n">Modellagenauffüllung mit French / Farbe</span><span class="p">45 €</span></div>
-          </div>
+          <div class="menu-row"><span class="n">Natur</span><span class="p">40 €</span></div>
+          <div class="menu-row"><span class="n">+ Farbe</span><span class="p">+8 €</span></div>
+          <div class="menu-row"><span class="n">+ Babyboomer</span><span class="p">+10 €</span></div>
+          <div class="menu-row"><span class="n">+ Maniküre</span><span class="p">+5 €</span></div>
+          <div class="menu-row"><span class="n">+ Altmodellage entfernen <em>(beim Neumodellage)</em></span><span class="p">+5 €</span></div>
+          <div class="menu-row"><span class="n">+ Design / Extra <em>(Preis nach Aufwand, vor Beginn der Behandlung mitgeteilt)</em></span><span class="p">n. A.</span></div>
+        </div>
+      </div>
+
+      <div class="menu-cat reveal">
+        <h3>Auffüllen mit Gel</h3>
+        <div class="menu-body">
+          <div class="menu-row"><span class="n">Natur</span><span class="p">35 €</span></div>
+          <div class="menu-row"><span class="n">+ Farbe</span><span class="p">+8 €</span></div>
+          <div class="menu-row"><span class="n">+ Babyboomer</span><span class="p">+10 €</span></div>
+          <div class="menu-row"><span class="n">+ Maniküre</span><span class="p">+5 €</span></div>
+          <div class="menu-row"><span class="n">+ Reparatur pro Nagel</span><span class="p">+1 €</span></div>
+          <div class="menu-row"><span class="n">+ Design / Extra <em>(Preis nach Aufwand, vor Beginn der Behandlung mitgeteilt)</em></span><span class="p">n. A.</span></div>
         </div>
       </div>
 
       <div class="menu-cat reveal">
         <h3>Maniküre</h3>
         <div class="menu-body">
-          <div class="menu-row"><span class="n">Maniküre <em>(inkl. Glanzpolitur &amp; Handmassage)</em></span><span class="p">15 €</span></div>
-          <div class="menu-row"><span class="n">mit Lack</span><span class="p">20 €</span></div>
-          <div class="menu-row"><span class="n">mit French-Lack</span><span class="p">25 €</span></div>
-          <div class="menu-row"><span class="n">mit Shellac</span><span class="p">33 €</span></div>
-          <div class="menu-row"><span class="n">Shellac</span><span class="p">20 €</span></div>
+          <div class="menu-row"><span class="n">Basic Maniküre</span><span class="p">18 €</span></div>
+          <div class="menu-row"><span class="n">+ CND Shellac</span><span class="p">+20 €</span></div>
+          <div class="menu-row"><span class="n">+ Shellac entfernen <em>(mit Folgeservice)</em></span><span class="p">+5 €</span></div>
+          <div class="menu-row"><span class="n">+ Nur Shellac entfernen <em>(ohne weitere Behandlung)</em></span><span class="p">+10 €</span></div>
+          <div class="menu-row"><span class="n">+ Gel entfernen <em>(mit Folgeservice)</em></span><span class="p">+10 €</span></div>
+          <div class="menu-row"><span class="n">+ Nur Gel entfernen <em>(ohne weitere Behandlung)</em></span><span class="p">+15 €</span></div>
         </div>
       </div>
 
       <div class="menu-cat reveal">
         <h3>Pediküre</h3>
         <div class="menu-body">
-          <div class="menu-row"><span class="n">Pediküre</span><span class="p">30 €</span></div>
-          <div class="menu-row"><span class="n">mit Lack</span><span class="p">35 €</span></div>
-          <div class="menu-row"><span class="n">mit French-Lack</span><span class="p">40 €</span></div>
-          <div class="menu-row"><span class="n">mit Shellac</span><span class="p">43 €</span></div>
-        </div>
-      </div>
-
-      <div class="menu-cat reveal">
-        <h3>Extras</h3>
-        <div class="menu-body">
-          <div class="menu-row"><span class="n">Feilen &amp; Lackieren</span><span class="p">12 €</span></div>
-          <div class="menu-row"><span class="n">Nageldesign 2 Finger / komplett</span><span class="p">5 € / 15 €</span></div>
-          <div class="menu-row"><span class="n">Piercing pro Finger</span><span class="p">5 €</span></div>
-          <div class="menu-row"><span class="n">Reparatur pro Finger</span><span class="p">5 €</span></div>
-          <div class="menu-row"><span class="n">Ablösen Gel / Shellac</span><span class="p">15 € / 10 €</span></div>
-          <div class="menu-row"><span class="n">Extralänge</span><span class="p">ab 5 €</span></div>
-          <div class="menu-row"><span class="n">Shellac-Entfernung + Weiterbehandlung</span><span class="p">5 €</span></div>
-          <div class="menu-row"><span class="n">Gel-Entfernung + Weiterbehandlung</span><span class="p">5 €</span></div>
+          <div class="menu-row"><span class="n">Basic Pediküre</span><span class="p">33 €</span></div>
+          <div class="menu-row"><span class="n">+ CND Shellac</span><span class="p">+15 €</span></div>
+          <div class="menu-row"><span class="n">+ Mit Gel</span><span class="p">+20 €</span></div>
+          <div class="menu-row"><span class="n">+ Shellac entfernen <em>(mit Folgeservice)</em></span><span class="p">+5 €</span></div>
+          <div class="menu-row"><span class="n">+ Nur Shellac entfernen <em>(ohne weitere Behandlung)</em></span><span class="p">+10 €</span></div>
+          <div class="menu-row"><span class="n">+ Gel entfernen <em>(mit Folgeservice)</em></span><span class="p">+10 €</span></div>
+          <div class="menu-row"><span class="n">+ Nur Gel entfernen <em>(ohne weitere Behandlung)</em></span><span class="p">+15 €</span></div>
+          <div class="menu-row"><span class="n">+ Design / Extra <em>(Preis nach Aufwand, vor Beginn der Behandlung mitgeteilt)</em></span><span class="p">n. A.</span></div>
+          <div class="menu-sub">
+            <span class="slabel">Signature</span>
+            <div class="menu-row"><span class="n">+ SPA Pediküre <em>(Zusatz zur Basic Pediküre)</em></span><span class="p">+15 €</span></div>
+          </div>
         </div>
       </div>
     </div>
 
-    <p class="services-note reveal">Alle Preise verstehen sich als Richtwerte, dein genauer Preis hängt von Länge und Design ab. Frag uns einfach, wir beraten dich gern.</p>
+    <div class="rituals reveal">
+      <div class="ritual">
+        <span class="r-kicker">Signature Experience</span>
+        <h4>Foot Ritual</h4>
+        <p class="r-sub">Spa Experience</p>
+        <p>Ein verwöhnendes Fußritual für pure Entspannung. Mehrere pflegende Schritte, wohltuende Massage und hochwertige Produkte – für ein rundum erholsames Spa-Erlebnis und sichtbar gepflegte Füße.</p>
+      </div>
+      <div class="ritual">
+        <span class="r-kicker">Signature Experience</span>
+        <h4>Herbal Foot Ritual</h4>
+        <p class="r-sub">Kräuter-Fußbad</p>
+        <p>Wohltuendes Kräuter-Fußbad zur Förderung der Durchblutung, Entspannung für Körper und Geist und für einen erholsameren Schlaf.</p>
+      </div>
+    </div>
+
+    <div class="services-notes reveal">
+      <p><b>Alle Preise in EUR inkl. 19% MwSt.</b></p>
+      <p>Leistungen, die nicht in der Preisliste aufgeführt sind, werden vor Beginn der Behandlung mitgeteilt.</p>
+      <p><b>Garantie:</b> Gel 10 Tage · Shellac 7 Tage — nur mit Bonuskarte.</p>
+    </div>
   </div>
 </section>
 
@@ -706,16 +295,16 @@ body[data-theme="magenta"]{--ctrl:var(--cream)}
   <div class="events-track" id="eventsTrack">
     <article class="event-card reveal">
       <span class="ev-tag">Opening</span>
-      <span class="ev-mark">01.09.26</span>
+      <span class="ev-mark">15.09.26</span>
       <p class="ev-text">Wir öffnen unsere Türen in Frankfurt! Komm vorbei, stoß mit uns an und erlebe, wie Kunst auf Nägel trifft.</p>
       <div class="ev-meta"><b>Grand Opening</b><span>Frankfurt · Demnächst</span></div>
     </article>
 
     <article class="event-card reveal">
-      <span class="ev-tag">Workshop</span>
-      <span class="ev-mark">15.10.26</span>
-      <p class="ev-text">Lern die Kunst hinter deinen Lieblingsdesigns kennen, ein entspannter Nachmittag, an dem du selbst zum Künstler wirst.</p>
-      <div class="ev-meta"><b>Nail-Art-Workshop</b><span>Frühjahr 2026 · Frankfurt</span></div>
+      <span class="ev-tag">Social</span>
+      <span class="ev-mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="32" height="32"><rect x="3" y="3" width="18" height="18" rx="5.2"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.15" fill="currentColor" stroke="none"/></svg></span>
+      <p class="ev-text">Folge uns auf Instagram für neue Designs, Behind-the-Scenes und alle Neuigkeiten aus dem Studio.</p>
+      <div class="ev-meta"><b>@nailgallery.ffm</b><span>Instagram · Frankfurt</span></div>
     </article>
   </div>
 </section>
@@ -723,18 +312,20 @@ body[data-theme="magenta"]{--ctrl:var(--cream)}
 <!-- ============ JOURNAL (Stay up to date) ============ -->
 <section class="journal" id="journal">
   <div class="journal-inner">
-    <p class="journal-kicker reveal">News &amp; Meinung</p>
-    <h2 class="journal-title reveal">Bleib auf dem Laufenden</h2>
+    <p class="journal-kicker reveal">Ausstattung &amp; Hygiene</p>
+    <h2 class="journal-title reveal">Womit wir arbeiten</h2>
     <div class="posts">
       <article class="post reveal">
-        <a class="post-media" href="#"><img src="assets/nd-process.jpg" alt="Sterile Werkzeuge bei der Nagelpflege"></a>
-        <h3><a href="#">Sauberkeit, die du sehen kannst</a></h3>
-        <p class="post-date">8. August 2026</p>
+        <a class="post-media" href="#"><img src="assets/nd-process.jpg" alt="KI-gesteuerte Aushärtungslampe im Studio"></a>
+        <p class="post-date">Studio-Technik</p>
+        <h3><a href="#">KI-Aushärtungslampe</a></h3>
+        <p class="post-text">Unsere Aushärtungslampe erkennt die Hand automatisch und wählt die optimale Aushärtungszeit – für ein gleichmäßiges, schonendes Ergebnis ganz ohne Hitzespitzen. Präzise KI-Technik, die dein Gel perfekt und materialschonend aushärtet.</p>
       </article>
       <article class="post reveal">
-        <a class="post-media" href="#"><img src="assets/studio-story.jpg" alt="The Vietnamese Nail Story"></a>
-        <h3><a href="#">Vietnamesische Nagelkunst: mehr als ein Trend</a></h3>
-        <p class="post-date">24. Juli 2026</p>
+        <a class="post-media" href="hygiene.html"><img src="assets/hygiene.jpg" alt="Sterile Werkzeuge und hochwertige Hygiene-Produkte"></a>
+        <p class="post-date">Hygiene-Standard</p>
+        <h3><a href="hygiene.html">Premium-Hygiene</a></h3>
+        <p class="post-text">Sterilisierte Werkzeuge, hochwertige Einwegprodukte und frische Sets für jeden Gast – nach EU-Standard. Sauberkeit, die du sehen und der du vertrauen kannst, bei jedem einzelnen Besuch.</p>
       </article>
     </div>
   </div>
@@ -815,8 +406,8 @@ body[data-theme="magenta"]{--ctrl:var(--cream)}
       <div class="footer-col reveal">
         <h4>Studio</h4>
         <ul>
-          <li><a href="#leistungen">Leistungen</a></li>
-          <li><a href="#galerie">Galerie</a></li>
+          <li><a href="leistungen.html">Leistungen</a></li>
+          <li><a href="galerie.html">Galerie</a></li>
           <li><a href="#events">Events</a></li>
           <li><a href="#ueber-uns">Über uns</a></li>
         </ul>
@@ -890,6 +481,7 @@ body[data-theme="magenta"]{--ctrl:var(--cream)}
       // once scrolled past the hero, the About (cream) section needs dark controls
       const past=window.scrollY > hero.offsetHeight-90;
       document.body.dataset.theme = past ? 'light' : slides[idx].dataset.theme;
+      document.querySelector('nav').classList.toggle('nav--scrolled', window.scrollY > 40);
     }
     function go(n){
       idx=(n+slides.length)%slides.length;

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leistungen &amp; Preise &middot; Nail Gallery</title>
+<meta name="description" content="Preisliste und Leistungen von Nail Gallery Frankfurt: Neumodellage, Auff&uuml;llen, Manik&uuml;re, Pedik&uuml;re und Signature Foot Rituals.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<style>
+  /* Unterseite: kein Hero dahinter -> Nav bekommt sofort einen Hintergrund */
+  body.subpage{background:var(--black)}
+  .subpage nav{background:rgba(16,16,16,.9);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 1px 0 rgba(255,254,247,.08)}
+  .subpage nav .brand,.subpage nav .meta{color:var(--cream)}
+  .subpage nav a{text-decoration:none}
+  .subpage nav .meta{opacity:.85;transition:opacity .3s ease}
+  .subpage nav .meta:hover{opacity:1}
+  .subpage .services{padding-top:clamp(7rem,14vw,10rem)}
+  /* Preisliste-Seite: auf Mobile alle Kategorien offen (kein Accordion) */
+  @media(max-width:720px){
+    .subpage .menu-cat>.menu-body{max-height:none !important;opacity:1 !important}
+    .subpage .menu-cat>h3{cursor:default;padding-right:0}
+    .subpage .menu-cat>h3::after{display:none}
+  }
+</style>
+</head>
+<body data-theme="dark" class="subpage">
+
+<nav>
+  <a class="brand" href="index.html">Nail&nbsp;Gallery</a>
+  <a class="meta" href="index.html">&larr;&nbsp;Startseite</a>
+</nav>
+
+<section class="services" id="leistungen">
+  <div class="services-inner">
+    <span class="label eyebrow reveal">Leistungen &amp; Preise</span>
+    <h2 class="reveal">Such dir dein Meisterwerk aus.</h2>
+
+    <div class="menu">
+      <div class="menu-cat reveal">
+        <h3>Neumodellage mit Gel</h3>
+        <div class="menu-body">
+          <div class="menu-row"><span class="n">Natur</span><span class="p">40 €</span></div>
+          <div class="menu-row"><span class="n">+ Farbe</span><span class="p">+8 €</span></div>
+          <div class="menu-row"><span class="n">+ Babyboomer</span><span class="p">+10 €</span></div>
+          <div class="menu-row"><span class="n">+ Maniküre</span><span class="p">+5 €</span></div>
+          <div class="menu-row"><span class="n">+ Altmodellage entfernen <em>(beim Neumodellage)</em></span><span class="p">+5 €</span></div>
+          <div class="menu-row"><span class="n">+ Design / Extra <em>(Preis nach Aufwand, vor Beginn der Behandlung mitgeteilt)</em></span><span class="p">n. A.</span></div>
+        </div>
+      </div>
+
+      <div class="menu-cat reveal">
+        <h3>Auffüllen mit Gel</h3>
+        <div class="menu-body">
+          <div class="menu-row"><span class="n">Natur</span><span class="p">35 €</span></div>
+          <div class="menu-row"><span class="n">+ Farbe</span><span class="p">+8 €</span></div>
+          <div class="menu-row"><span class="n">+ Babyboomer</span><span class="p">+10 €</span></div>
+          <div class="menu-row"><span class="n">+ Maniküre</span><span class="p">+5 €</span></div>
+          <div class="menu-row"><span class="n">+ Reparatur pro Nagel</span><span class="p">+1 €</span></div>
+          <div class="menu-row"><span class="n">+ Design / Extra <em>(Preis nach Aufwand, vor Beginn der Behandlung mitgeteilt)</em></span><span class="p">n. A.</span></div>
+        </div>
+      </div>
+
+      <div class="menu-cat reveal">
+        <h3>Maniküre</h3>
+        <div class="menu-body">
+          <div class="menu-row"><span class="n">Basic Maniküre</span><span class="p">18 €</span></div>
+          <div class="menu-row"><span class="n">+ CND Shellac</span><span class="p">+20 €</span></div>
+          <div class="menu-row"><span class="n">+ Shellac entfernen <em>(mit Folgeservice)</em></span><span class="p">+5 €</span></div>
+          <div class="menu-row"><span class="n">+ Nur Shellac entfernen <em>(ohne weitere Behandlung)</em></span><span class="p">+10 €</span></div>
+          <div class="menu-row"><span class="n">+ Gel entfernen <em>(mit Folgeservice)</em></span><span class="p">+10 €</span></div>
+          <div class="menu-row"><span class="n">+ Nur Gel entfernen <em>(ohne weitere Behandlung)</em></span><span class="p">+15 €</span></div>
+        </div>
+      </div>
+
+      <div class="menu-cat reveal">
+        <h3>Pediküre</h3>
+        <div class="menu-body">
+          <div class="menu-row"><span class="n">Basic Pediküre</span><span class="p">33 €</span></div>
+          <div class="menu-row"><span class="n">+ CND Shellac</span><span class="p">+15 €</span></div>
+          <div class="menu-row"><span class="n">+ Mit Gel</span><span class="p">+20 €</span></div>
+          <div class="menu-row"><span class="n">+ Shellac entfernen <em>(mit Folgeservice)</em></span><span class="p">+5 €</span></div>
+          <div class="menu-row"><span class="n">+ Nur Shellac entfernen <em>(ohne weitere Behandlung)</em></span><span class="p">+10 €</span></div>
+          <div class="menu-row"><span class="n">+ Gel entfernen <em>(mit Folgeservice)</em></span><span class="p">+10 €</span></div>
+          <div class="menu-row"><span class="n">+ Nur Gel entfernen <em>(ohne weitere Behandlung)</em></span><span class="p">+15 €</span></div>
+          <div class="menu-row"><span class="n">+ Design / Extra <em>(Preis nach Aufwand, vor Beginn der Behandlung mitgeteilt)</em></span><span class="p">n. A.</span></div>
+          <div class="menu-sub">
+            <span class="slabel">Signature</span>
+            <div class="menu-row"><span class="n">+ SPA Pediküre <em>(Zusatz zur Basic Pediküre)</em></span><span class="p">+15 €</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rituals reveal">
+      <div class="ritual">
+        <span class="r-kicker">Signature Experience</span>
+        <h4>Foot Ritual</h4>
+        <p class="r-sub">Spa Experience</p>
+        <p>Ein verwöhnendes Fußritual für pure Entspannung. Mehrere pflegende Schritte, wohltuende Massage und hochwertige Produkte – für ein rundum erholsames Spa-Erlebnis und sichtbar gepflegte Füße.</p>
+      </div>
+      <div class="ritual">
+        <span class="r-kicker">Signature Experience</span>
+        <h4>Herbal Foot Ritual</h4>
+        <p class="r-sub">Kräuter-Fußbad</p>
+        <p>Wohltuendes Kräuter-Fußbad zur Förderung der Durchblutung, Entspannung für Körper und Geist und für einen erholsameren Schlaf.</p>
+      </div>
+    </div>
+
+    <div class="services-notes reveal">
+      <p><b>Alle Preise in EUR inkl. 19% MwSt.</b></p>
+      <p>Leistungen, die nicht in der Preisliste aufgeführt sind, werden vor Beginn der Behandlung mitgeteilt.</p>
+      <p><b>Garantie:</b> Gel 10 Tage · Shellac 7 Tage — nur mit Bonuskarte.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer" id="kontakt">
+  <div class="footer-inner">
+    <div class="footer-cols">
+      <div class="footer-brand-col reveal">
+        <div class="footer-brand">Nail&nbsp;Gallery</div>
+        <p class="footer-tagline">Premium Nageldesign, Manik&uuml;re und Pedik&uuml;re in Frankfurt. Ruhig, sauber und detailverliebt.</p>
+      </div>
+      <div class="footer-col reveal">
+        <h4>Studio</h4>
+        <ul>
+          <li><a href="leistungen.html">Leistungen</a></li>
+          <li><a href="galerie.html">Galerie</a></li>
+          <li><a href="index.html#events">Events</a></li>
+          <li><a href="index.html#ueber-uns">&Uuml;ber uns</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-contact reveal">
+        <h4>Kontakt</h4>
+        <p>Vilbeler Str. 27<br>60311 Frankfurt am Main</p>
+        <p>Mo&#8211;Sa: 10:00 &#8211; 19:00<br>So: geschlossen</p>
+        <p><a href="mailto:hallo@nailgallery.de">hallo@nailgallery.de</a></p>
+        <p><a href="https://www.instagram.com/nailgallery.ffm/" target="_blank" rel="noopener" aria-label="Instagram">Instagram: @nailgallery.ffm</a></p>
+      </div>
+      <div class="footer-col reveal">
+        <h4>Rechtliches</h4>
+        <ul>
+          <li><a href="impressum.html">Impressum</a></li>
+          <li><a href="datenschutz.html">Datenschutzerkl&auml;rung</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Nail Gallery</span>
+      <span>Every nail is a masterpiece.</span>
+      <a class="footer-made" href="https://tuttylab.vn/" target="_blank" rel="noopener">Made by <b>Tutty<span class="lab">Lab</span></b></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // reveal on scroll
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.14,rootMargin:'0px 0px -6% 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el,i){el.style.transitionDelay=(Math.min(i%5,4)*80)+'ms';io.observe(el);});
+  // sticky nav shrink
+  var nav=document.querySelector('nav');
+  function onScroll(){nav.classList.toggle('nav--scrolled', window.scrollY>40);}
+  addEventListener('scroll',onScroll,{passive:true}); onScroll();
+  // Preisliste-Seite: kein Accordion — alle Kategorien bleiben offen.
+</script>
+</body>
+</html>
