@@ -4,7 +4,7 @@
 (function () {
   "use strict";
 
-  var GA_ID = "G-XXXXXXXXXX";           // TODO: echte Google-Analytics Measurement-ID eintragen
+  var GA_ID = "G-ZLJGZTMZX0";           // Google-Analytics Measurement-ID (Nail Gallery)
   var KEY = "ng_cookie_consent";         // gespeicherter Wert: "accepted" | "rejected"
 
   function getChoice() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
