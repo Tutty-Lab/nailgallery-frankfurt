@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nagelstudio Konstablerwache · Nageldesign & Pediküre Spa | Nail Gallery</title>
-<meta name="description" content="Nagelstudio an der Konstablerwache in der Vilbeler Straße 27, Frankfurt. Nageldesign, Nail Design, Maniküre und Pediküre Spa mit höchsten Hygiene-Standards.">
+<meta name="description" content="Nagelstudio im Herzen Frankfurts – an der Konstablerwache, Vilbeler Straße 27. Nageldesign, Maniküre und Pediküre Spa mit höchsten Hygiene-Standards.">
 <meta name="keywords" content="Nagelstudio Konstablerwache, Nagelstudio Vilbeler Straße, Nagelstudio Frankfurt, Nageldesign, Nail Design, Pediküre Spa, Hygiene, Maniküre Frankfurt">
 <link rel="canonical" href="https://nailgalleryfrankfurt.de/">
 <meta name="robots" content="index, follow">
@@ -13,12 +13,12 @@
 <meta property="og:site_name" content="Nail Gallery">
 <meta property="og:locale" content="de_DE">
 <meta property="og:title" content="Nagelstudio Konstablerwache · Nageldesign & Pediküre Spa | Nail Gallery">
-<meta property="og:description" content="Nagelstudio an der Konstablerwache in der Vilbeler Straße 27, Frankfurt. Nageldesign, Nail Design, Maniküre und Pediküre Spa mit höchsten Hygiene-Standards.">
+<meta property="og:description" content="Nagelstudio im Herzen Frankfurts – an der Konstablerwache, Vilbeler Straße 27. Nageldesign, Maniküre und Pediküre Spa mit höchsten Hygiene-Standards.">
 <meta property="og:url" content="https://nailgalleryfrankfurt.de/">
 <meta property="og:image" content="https://nailgalleryfrankfurt.de/assets/art-meets-nails.jpeg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Nagelstudio Konstablerwache · Nageldesign & Pediküre Spa | Nail Gallery">
-<meta name="twitter:description" content="Nagelstudio an der Konstablerwache in der Vilbeler Straße 27, Frankfurt. Nageldesign, Nail Design, Maniküre und Pediküre Spa mit höchsten Hygiene-Standards.">
+<meta name="twitter:description" content="Nagelstudio im Herzen Frankfurts – an der Konstablerwache, Vilbeler Straße 27. Nageldesign, Maniküre und Pediküre Spa mit höchsten Hygiene-Standards.">
 <meta name="twitter:image" content="https://nailgalleryfrankfurt.de/assets/art-meets-nails.jpeg">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,7 +30,7 @@
   "@context":"https://schema.org",
   "@type":"NailSalon",
   "name":"Nail Gallery",
-  "description":"Nagelstudio an der Konstablerwache in Frankfurt am Main - Nageldesign, Maniküre und Pediküre Spa mit höchsten Hygiene-Standards.",
+  "description":"Nagelstudio im Herzen Frankfurts an der Konstablerwache - Nageldesign, Maniküre und Pediküre Spa mit höchsten Hygiene-Standards.",
   "image":"https://nailgalleryfrankfurt.de/assets/art-meets-nails.jpeg",
   "url":"https://nailgalleryfrankfurt.de/",
   "email":"nailgallery.ffm@gmail.com",
@@ -43,8 +43,58 @@
   "sameAs":["https://www.instagram.com/nailgallery.ffm/"]
 }
 </script>
+<style>
+  /* Loading screen (Intro) */
+  #ng-loader{position:fixed;inset:0;z-index:9999;background:#0d0d0d;display:flex;align-items:center;justify-content:center;
+    opacity:1;transition:opacity .8s ease,visibility .8s ease}
+  #ng-loader.hide{opacity:0;visibility:hidden}
+  #ng-loader .ngl-photo{position:absolute;inset:0;
+    background:url('assets/loader-statue.jpg') 50% 30%/cover no-repeat;
+    filter:grayscale(.12) brightness(.55) contrast(1.05);}
+  #ng-loader .ngl-veil{position:absolute;inset:0;
+    background:radial-gradient(120% 80% at 50% 42%,rgba(13,13,13,.35) 0%,rgba(13,13,13,.72) 68%,rgba(13,13,13,.94) 100%);}
+  #ng-loader .ngl-inner{position:relative;z-index:2;text-align:center;padding:2rem;
+    display:flex;flex-direction:column;align-items:center;animation:nglIn 1s cubic-bezier(.16,.8,.24,1) both}
+  #ng-loader .ngl-logo{font-family:'Cormorant Garamond',serif;font-weight:600;letter-spacing:.2em;color:#FFFEF7;
+    font-size:clamp(2rem,7vw,3.6rem);text-transform:uppercase;line-height:1}
+  #ng-loader .ngl-sub{margin-top:1.05rem;font-family:'Inter',sans-serif;font-weight:500;letter-spacing:.4em;
+    text-transform:uppercase;font-size:clamp(.58rem,1.5vw,.72rem);color:rgba(255,254,247,.68)}
+  #ng-loader .ngl-bar{margin-top:2.2rem;width:min(220px,54vw);height:2px;border-radius:2px;
+    background:rgba(255,254,247,.16);overflow:hidden}
+  #ng-loader .ngl-bar span{display:block;height:100%;width:40%;background:#8A0467;
+    animation:nglBar 1.25s ease-in-out infinite}
+  @keyframes nglIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  @keyframes nglBar{0%{transform:translateX(-120%)}100%{transform:translateX(320%)}}
+  @media(prefers-reduced-motion:reduce){#ng-loader .ngl-bar span{animation:none;width:100%}#ng-loader .ngl-inner{animation:none}}
+</style>
 </head>
 <body data-theme="dark">
+
+<div id="ng-loader" role="status" aria-label="Nail Gallery wird geladen">
+  <div class="ngl-photo"></div>
+  <div class="ngl-veil"></div>
+  <div class="ngl-inner">
+    <div class="ngl-logo">Nail&nbsp;Gallery</div>
+    <div class="ngl-sub">Every&nbsp;nail&nbsp;is&nbsp;a&nbsp;masterpiece</div>
+    <div class="ngl-bar"><span></span></div>
+  </div>
+</div>
+<script>
+(function(){
+  var l=document.getElementById('ng-loader'); if(!l) return;
+  try{ if(sessionStorage.getItem('ng_seen')){ l.parentNode.removeChild(l); return; } }catch(e){}
+  var root=document.documentElement; root.style.overflow='hidden';
+  var start=Date.now(), MIN=1500, MAXWAIT=4500, done=false;
+  function hide(){ if(done) return; done=true;
+    try{ sessionStorage.setItem('ng_seen','1'); }catch(e){}
+    l.classList.add('hide'); root.style.overflow='';
+    setTimeout(function(){ if(l && l.parentNode) l.parentNode.removeChild(l); }, 850);
+  }
+  function ready(){ setTimeout(hide, Math.max(0, MIN-(Date.now()-start))); }
+  if(document.readyState==='complete') ready(); else window.addEventListener('load', ready);
+  setTimeout(hide, MAXWAIT);
+})();
+</script>
 
 <nav>
   <a class="brand" href="index.html">Nail&nbsp;Gallery</a>
@@ -121,7 +171,7 @@
   <div class="about-inner">
     <span class="label eyebrow reveal">Über uns</span>
     <h2 class="reveal">Zurück im <span class="mag">Herzen</span> von Frankfurt.</h2>
-    <p class="about-lead reveal">Unsere Geschichte begann 2014 in Frankfurt-Bornheim. Dort eröffneten wir unser erstes Studio. Nach vielen Jahren voller Erfahrung und Leidenschaft kehren wir nun zurück – mitten ins Herz von Frankfurt.</p>
+    <p class="about-lead reveal"><b>Nagelstudio im Herzen Frankfurts.</b> Unsere Geschichte begann 2014 in Frankfurt-Bornheim. Dort eröffneten wir unser erstes Studio. Nach vielen Jahren voller Erfahrung und Leidenschaft kehren wir nun zurück – mitten ins Herz von Frankfurt.</p>
     <p class="about-lead reveal">Wir nehmen uns Zeit für dich, beraten dich ehrlich und arbeiten mit Liebe zum Detail. Du sagst uns, was dir gefällt – den Rest machen wir gemeinsam.</p>
 
     <div class="timeline" id="timeline">
@@ -680,6 +730,7 @@
     document.querySelectorAll('.nav-menu a').forEach(function(a){a.addEventListener('click',function(){document.body.classList.remove('nav-open');t.setAttribute('aria-expanded','false');});});
   })();
 </script>
-<script src="lightbox.js?v=1"></script>
+<script src="lightbox.js?v=2"></script>
+<script src="consent.js?v=1"></script>
 </body>
 </html>

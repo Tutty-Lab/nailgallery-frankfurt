@@ -19,6 +19,8 @@
   var imgs = [].slice.call(document.querySelectorAll('img')).filter(function (im) {
     if (im.classList.contains('lb-img')) return false;
     if (im.closest('nav')) return false;
+    if (im.closest('.philo-media')) return false;   // Deko-Szene + Rahmen-Slider: nicht zoomen
+    if (im.closest('[data-no-lightbox]') || im.hasAttribute('data-no-lightbox')) return false;
     if (!im.getAttribute('src')) return false;
     return true;
   });
