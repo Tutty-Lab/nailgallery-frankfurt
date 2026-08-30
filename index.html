@@ -48,8 +48,8 @@
   #ng-loader{position:fixed;inset:0;z-index:9999;background:#0d0d0d;display:flex;align-items:center;justify-content:center;
     opacity:1;transition:opacity .8s ease,visibility .8s ease}
   #ng-loader.hide{opacity:0;visibility:hidden}
-  #ng-loader .ngl-photo{position:absolute;inset:0;
-    background:url('assets/loader-statue.jpg') 50% 30%/cover no-repeat;
+  #ng-loader .ngl-photo{position:absolute;inset:0;width:100%;height:100%;display:block;
+    object-fit:cover;object-position:50% 30%;
     filter:grayscale(.12) brightness(.55) contrast(1.05);}
   #ng-loader .ngl-veil{position:absolute;inset:0;
     background:radial-gradient(120% 80% at 50% 42%,rgba(13,13,13,.35) 0%,rgba(13,13,13,.72) 68%,rgba(13,13,13,.94) 100%);}
@@ -71,7 +71,7 @@
 <body data-theme="dark">
 
 <div id="ng-loader" role="status" aria-label="Nail Gallery – Nagelstudio an der Konstablerwache Frankfurt wird geladen">
-  <div class="ngl-photo"></div>
+  <img class="ngl-photo" src="assets/loader-statue.jpg" alt="Klassische Statue mit rot lackierten Nägeln – Nail Gallery, Nagelstudio an der Konstablerwache Frankfurt">
   <div class="ngl-veil"></div>
   <div class="ngl-inner">
     <div class="ngl-logo">Nail&nbsp;Gallery</div>
