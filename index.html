@@ -24,7 +24,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=9">
+<link rel="stylesheet" href="styles.css?v=10">
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
@@ -620,18 +620,24 @@
     const track=document.getElementById('galleryTrack'); if(!track) return;
     const cards=[...track.querySelectorAll('.highlight-slide')];
     function amt(){const gap=parseFloat(getComputedStyle(track).gap)||16;return cards[0].getBoundingClientRect().width+gap;}
+    function activeIdx(){return Math.min(cards.length-1,Math.max(0,Math.round(track.scrollLeft/amt())));}
+    // Track nur so hoch wie das aktuell sichtbare Slide -> kein schwarzer Leerraum.
+    function setH(){const c=cards[activeIdx()]; if(c) track.style.height=c.offsetHeight+'px';}
     const nx=document.querySelector('.gal-next'), pv=document.querySelector('.gal-prev');
     if(nx)nx.addEventListener('click',()=>track.scrollBy({left:amt(),behavior:'smooth'}));
     if(pv)pv.addEventListener('click',()=>track.scrollBy({left:-amt(),behavior:'smooth'}));
     const dotsWrap=document.getElementById('galleryDots');
+    let dots=[];
     if(dotsWrap){
       cards.forEach((c,i)=>{const b=document.createElement('button');b.className='gal-dot';b.setAttribute('aria-label','Highlight '+(i+1));b.addEventListener('click',()=>track.scrollTo({left:amt()*i,behavior:'smooth'}));dotsWrap.appendChild(b);});
-      const dots=[...dotsWrap.children];
-      function sync(){const idx=Math.min(cards.length-1,Math.round(track.scrollLeft/amt()));dots.forEach((d,i)=>d.classList.toggle('is-active',i===idx));}
-      let t;track.addEventListener('scroll',()=>{clearTimeout(t);t=setTimeout(sync,60);});
-      window.addEventListener('resize',sync);
-      sync();
+      dots=[...dotsWrap.children];
     }
+    function sync(){const idx=activeIdx();dots.forEach((d,i)=>d.classList.toggle('is-active',i===idx));setH();}
+    let t;track.addEventListener('scroll',()=>{clearTimeout(t);t=setTimeout(sync,60);});
+    window.addEventListener('resize',()=>{clearTimeout(t);t=setTimeout(sync,60);});
+    window.addEventListener('load',setH);
+    if(document.fonts&&document.fonts.ready)document.fonts.ready.then(setH);
+    sync();
   })();
 
   /* ---- framed nail-art carousel in the Philosophie section ---- */

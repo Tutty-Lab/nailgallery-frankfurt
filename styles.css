@@ -383,8 +383,9 @@ body[data-theme="magenta"]{--ctrl:var(--cream)}
 .gal-arrows svg{width:20px;height:20px}
 @media(max-width:720px){.gal-arrows button{width:44px;height:44px}.gal-arrows svg{width:17px;height:17px}}
 /* each slide = one service: a header + a 3–4 image grid */
-.gallery-track{display:flex;gap:clamp(1rem,3vw,2rem);overflow-x:auto;scroll-snap-type:x mandatory;
-  scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:.3rem}
+.gallery-track{display:flex;gap:clamp(1rem,3vw,2rem);overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;
+  align-items:flex-start;scrollbar-width:none;-webkit-overflow-scrolling:touch;padding-bottom:.3rem;
+  transition:height .4s cubic-bezier(.16,.8,.24,1)}
 .gallery-track::-webkit-scrollbar{display:none}
 .highlight-slide{flex:0 0 100%;min-width:0;scroll-snap-align:start}
 .hl-head{display:flex;align-items:baseline;gap:clamp(.7rem,2vw,1.3rem);flex-wrap:wrap;
