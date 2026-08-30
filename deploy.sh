@@ -5,9 +5,13 @@ set -u
 
 HOST="${FTP_HOST:?set FTP_HOST}"
 CRED="${FTP_USER:?set FTP_USER}:${FTP_PASS:?set FTP_PASS}"
-LOCAL=/d/naildemogallarry
+# Deploy from the folder this script lives in (portable: macOS & Linux).
+LOCAL="$(cd "$(dirname "$0")" && pwd)"
 
 cd "$LOCAL" || exit 1
+
+# Cross-platform file size: BSD/macOS stat first, GNU/Linux fallback.
+fsize() { stat -f %z "$1" 2>/dev/null || stat -c %s "$1"; }
 
 # Remote sizes, so a re-run only sends what is missing or different.
 remote_sizes=$(mktemp)
@@ -25,7 +29,7 @@ n=0; sent=0; skipped=0; failed=0
 
 for f in $files; do
   n=$((n + 1))
-  lsize=$(stat -c %s "$f")
+  lsize=$(fsize "$f")
   rsize=$(awk -v p="$f" '$2 == p {print $1}' "$remote_sizes" | head -1)
   if [ "${rsize:-x}" = "$lsize" ]; then
     skipped=$((skipped + 1))
