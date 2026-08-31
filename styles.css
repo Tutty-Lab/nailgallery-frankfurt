@@ -85,8 +85,21 @@ nav.nav--scrolled .nav-menu a{color:var(--cream)}
 .slide--photo::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
   background:linear-gradient(180deg,rgba(0,0,0,.55) 0%,rgba(0,0,0,.44) 45%,rgba(0,0,0,.85) 100%);}
 @media(max-width:700px){
-  .hero-bg{background-position:50% 44%;filter:contrast(1.03) brightness(.98) saturate(1.1);}
-  .hero-color{background-position:50% 44%;
+  /* Use a portrait crop so the CDN does not upscale a narrow slice of the
+     landscape source on high-density phone screens. */
+  .hero-bg,
+  .hero-color{
+    background-image:url('assets/hero-interior-mobile.webp');
+    background-image:-webkit-image-set(
+      url('assets/hero-interior-mobile.webp') 1x,
+      url('assets/hero-interior-mobile-2x.webp') 2x);
+    background-image:image-set(
+      url('assets/hero-interior-mobile.webp') 1x,
+      url('assets/hero-interior-mobile-2x.webp') 2x);
+    background-position:50% 44%;
+  }
+  .hero-bg{filter:contrast(1.03) brightness(.98) saturate(1.1);}
+  .hero-color{
     -webkit-mask-image:radial-gradient(70% 46% at 50% 40%, #000 60%, rgba(0,0,0,0) 100%);
             mask-image:radial-gradient(70% 46% at 50% 40%, #000 60%, rgba(0,0,0,0) 100%);}
   .slide--photo::after{background:linear-gradient(180deg,rgba(0,0,0,.52) 0%,rgba(0,0,0,.42) 42%,rgba(0,0,0,.88) 100%);}
